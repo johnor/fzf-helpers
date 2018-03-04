@@ -14,6 +14,11 @@ gi() {
    is_in_hg_repo && hg-history
 }
 
+gt() {
+   is_in_git_repo && git-tags
+   is_in_hg_repo && hg-tags
+}
+
 join-lines() {
   local item
   while read item; do

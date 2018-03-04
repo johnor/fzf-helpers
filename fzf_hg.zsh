@@ -31,3 +31,11 @@ hg-history() {
       --preview 'grep -o -P "(?<=\| )[0-9]+(?= \|)" <<< {} | cat | xargs -r hg log --color always --git -pvr | head -500' | \
    grep -o -P "(?<=\| )[0-9]+(?= \|)"
 }
+
+hg-tags() {
+  is_in_hg_repo || return
+  hg tags | sort |
+  fzf-down --ansi --multi --tac --preview-window right:70% \
+    --preview 'hg log --color always -f -r "$(sed -e "s#^\(.\+[[:alnum:]]\)\s\+\([0-9]\+\):.*#\"\1\"#" <<< {})" | head -'$LINES |
+  sed -e 's#^\(.\+[[:alnum:]]\)\s\+\([0-9]\+\):.*#\2#'
+}

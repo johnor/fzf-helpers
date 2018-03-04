@@ -30,7 +30,7 @@ git-history() {
   grep -o "[a-f0-9]\{7,\}"
 }
 
-gt() {
+git-tags() {
   is_in_git_repo || return
   git tag --sort -version:refname |
   fzf-down --multi --preview-window right:70% \
