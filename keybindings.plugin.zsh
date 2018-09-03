@@ -9,13 +9,13 @@ join-lines() {
   done
 }
 
-bind-git-helper() {
-  local char
+bind-helper() {
+  local c
   for c in $@; do
-    eval "fzf-g$c-widget() { zle reset-prompt; LBUFFER+=\$(g$c | join-lines) } "
+    eval "fzf-g$c-widget() { local result=\$(g$c | join-lines); zle reset-prompt; LBUFFER+=\$result }"
     eval "zle -N fzf-g$c-widget"
     eval "bindkey '^g^$c' fzf-g$c-widget"
   done
 }
-bind-git-helper f b t r i
-unset -f bind-git-helper
+bind-helper f b t r i
+unset -f bind-helper
