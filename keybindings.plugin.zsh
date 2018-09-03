@@ -1,23 +1,6 @@
-
-gf() {
-   is_in_git_repo && git-file
-   is_in_hg_repo && hg-file
-}
-
-gb() {
-   is_in_git_repo && git-branch
-   is_in_hg_repo && hg-branch
-}
-
-gi() {
-   is_in_git_repo && git-history
-   is_in_hg_repo && hg-history
-}
-
-gt() {
-   is_in_git_repo && git-tags
-   is_in_hg_repo && hg-tags
-}
+source "${0:A:h}"/fzf_helpers.sh
+source "${0:A:h}"/fzf_git.sh
+source "${0:A:h}"/fzf_hg.sh
 
 join-lines() {
   local item
